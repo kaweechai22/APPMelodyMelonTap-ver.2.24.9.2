@@ -99,12 +99,31 @@ Clean rebuild: ตัดโค้ดซ้ำ/โค้ดเก่า/เอฟ
 - เพิ่มปุ่ม "ทดสอบเสียงเตือน" ใกล้ Debug
 - เพิ่มระดับเสียง beep ให้ชัดขึ้น
 
-## v24.3 Ripeness Patch Only
+## v24.6 F-mean Ripeness Only
 - ใช้ฐาน v24.3 เดิม
 - แก้เฉพาะ logic ระดับการสุก
-- ไม่แตะระบบรับเสียง
-- ไม่แตะ FFT
-- ไม่แตะ tap detection
+- ใช้ f_mean เป็นแกนหลัก ตามแนวคิดเวอร์ชันแรก
+- Threshold หลัก:
+  - f_mean < 400 Hz = สุกเกิน
+  - 400–500 Hz = สุกพอดี
+  - 500–590 Hz = ใกล้สุก
+  - >590 Hz = ใกล้สุก/ดิบฝั่งยังไม่พร้อม
 - ไม่แตะ Brix / Firmness / Juice / Hollow
-- ไม่เพิ่ม v25 classifier
-- ไม่เพิ่ม safe wrapper
+- ไม่แตะระบบรับเสียง / FFT / tap detection / AI Voice / Export
+
+## v24.6.1 F-mean Label Fix
+- แยกคำแสดงผลให้ชัดเจนระหว่าง f_peak และ f_mean
+- ระบุว่า f_mean คือค่าที่ใช้จำแนกระดับการสุก
+- ไม่แก้ระบบรับเสียง / FFT / Brix / Firmness / Juice / Hollow
+
+## v24.7 F-mean Threshold Tuned
+- ปรับเฉพาะระดับการสุก
+- ใช้ f_mean เป็นแกนหลักตามแนวคิดเวอร์ชันแรก
+- Threshold:
+  - <370 Hz = สุกเกิน
+  - 370–410 Hz = ก้ำกึ่ง สุกเกิน/สุกพอดี ใช้โพรง ความแน่น low_ratio ช่วยตัดสิน
+  - 410–500 Hz = สุกพอดี
+  - 500–525 Hz = ก้ำกึ่ง สุกพอดี/ใกล้สุก ใช้ Brix Juice Hollow Firmness ช่วยตัดสิน
+  - 525–650 Hz = ใกล้สุก
+  - >650 Hz = ใกล้สุก/ยังไม่พร้อม
+- ไม่แตะระบบรับเสียง, FFT, Brix, Firmness, Juice, Hollow
