@@ -1,0 +1,28 @@
+Patch audit
+
+Base: MelodyMelonTap_v24_7_1_REQUESTED_PATCH(1).zip
+Output: MelodyMelonTap_v24_8_patched_from_v24_7_1.zip
+
+Kept files:
+- index.html
+- manifest.json
+- sw.js
+- README.md
+- .nojekyll
+- icon.png
+
+Added:
+- PATCH_AUDIT_v24_8.txt
+
+Removed from index.html after checking no direct calls:
+- 
+groupFromRipenessLabel- classifyRipenessAI- perfectRipeLabel- classifyRipenessFieldV226- classifyRipenessFieldV227
+
+Not removed because still referenced/needed:
+- predictBrixAI(), predictFirmnessAI(), predictJuiceAI(), predictHollowAI()
+- classifyRipenessAI120() because debug output still displays Audio120 ripeness label
+- service worker / manifest / icon files because PWA references them
+
+Main classifier changed:
+- classifyRipeness3StageV229() -> classifyRipenessV248_TEST9()
+- getRipenessExtraNote() -> getRipenessExtraNoteV248()

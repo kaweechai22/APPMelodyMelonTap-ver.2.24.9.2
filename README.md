@@ -136,3 +136,17 @@ Clean rebuild: ตัดโค้ดซ้ำ/โค้ดเก่า/เอฟ
 - ลบข้อความ “AI Voice Summary อ่านสรุปผลแบบภาษาคน ไม่อ่านตัวเลข”
 - ลบข้อความ “วิเคราะห์เสียงช่วง 50-1000Hz”
 - ส่วนอื่นคงเดิม ไม่แตะระบบรับเสียง/FFT/Brix/Firmness/Juice/Hollow/Export
+
+
+---
+
+## v24.8 patched from v24.7.1
+
+ใช้ v24.7.1 เป็นฐานจริง ไม่ rewrite ใหม่ทั้งระบบ
+
+สิ่งที่เปลี่ยน:
+- เก็บ audio pipeline / UI / PWA / icon เดิม
+- เปลี่ยน final ripeness classifier เป็น classifyRipenessV248_TEST9()
+- เพิ่ม harmonic_guard, hollow_correction, D_protection
+- ลดบทบาท flatness เป็น weak tie-break
+- ลบฟังก์ชันเก่าที่ตรวจแล้วไม่มีการเรียกใช้โดยตรง: groupFromRipenessLabel, classifyRipenessAI, perfectRipeLabel, classifyRipenessFieldV226, classifyRipenessFieldV227
